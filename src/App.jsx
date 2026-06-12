@@ -24,7 +24,10 @@ import {
   Calendar,
   SlidersHorizontal,
   Map as MapIcon,
-  Maximize2
+  Maximize2,
+  Instagram,
+  Linkedin,
+  Twitter
 } from 'lucide-react';
 
 /**
@@ -130,20 +133,20 @@ const LOCATIONS = [
 
 const JOURNAL_POSTS = [
   { 
-    title: "Market Outlook 2025", 
-    date: "Oct 12, 2024", 
+    title: "Market Outlook 2026", 
+    date: "Jan 15, 2026", 
     category: "Market Trends",
     image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
   },
   { 
     title: "The Art of Penthouse Living", 
-    date: "Sep 28, 2024", 
+    date: "May 28, 2026", 
     category: "Lifestyle",
     image: "https://images.unsplash.com/photo-1502005229762-cf1b2da7c5d6?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
   },
   { 
     title: "Sustainable Luxury Architecture", 
-    date: "Sep 15, 2024", 
+    date: "Jun 02, 2026", 
     category: "Design",
     image: "https://images.unsplash.com/photo-1518780664697-55e3ad937233?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
   }
@@ -324,7 +327,12 @@ const Navbar = () => {
         <div className="md:hidden bg-[#0F172A] border-b border-white/10">
           <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
             {['Properties', 'Locations', 'Journal', 'Contact'].map((item) => (
-              <a key={item} href={`#${item.toLowerCase()}`} className="block px-3 py-2 text-base font-medium text-white hover:text-[#D4AF37]">
+              <a 
+                key={item} 
+                href={`#${item.toLowerCase()}`} 
+                onClick={() => setIsOpen(false)}
+                className="block px-3 py-2 text-base font-medium text-white hover:text-[#D4AF37]"
+              >
                 {item}
               </a>
             ))}
@@ -396,7 +404,7 @@ const Hero = () => {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-left">
               <div>
                 <label className="block text-xs uppercase tracking-widest text-[#D4AF37] mb-2">Price Range</label>
-                <select className="w-full bg-white/5 border border-white/10 text-white p-2 text-sm focus:border-[#D4AF37] outline-none rounded-sm">
+                <select className="w-full bg-[#162032] border border-white/10 text-white p-2 text-sm focus:border-[#D4AF37] outline-none rounded-sm">
                   <option>Any Price</option>
                   <option>$1M - $3M</option>
                   <option>$3M - $5M</option>
@@ -406,10 +414,12 @@ const Hero = () => {
               </div>
               <div>
                 <label className="block text-xs uppercase tracking-widest text-[#D4AF37] mb-2">Property Type</label>
-                <select className="w-full bg-white/5 border border-white/10 text-white p-2 text-sm focus:border-[#D4AF37] outline-none rounded-sm">
+                <select className="w-full bg-[#162032] border border-white/10 text-white p-2 text-sm focus:border-[#D4AF37] outline-none rounded-sm">
                   <option>All Types</option>
                   <option>Condo</option>
                   <option>Penthouse</option>
+                  <option>Loft</option>
+                  <option>Villa</option>
                   <option>Townhouse</option>
                   <option>Estate</option>
                 </select>
@@ -450,7 +460,7 @@ const Hero = () => {
 const InteractiveMap = ({ onSelectProperty }) => {
   return (
     <section className="py-24 bg-[#0B1120] border-t border-white/5">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 reveal">
         <div className="mb-12 text-center">
           <h2 className="text-[#D4AF37] text-sm font-bold uppercase tracking-[0.2em] mb-2">Map View</h2>
           <h3 className="text-3xl md:text-4xl text-white font-light">Explore Our Collection</h3>
@@ -486,17 +496,17 @@ const InteractiveMap = ({ onSelectProperty }) => {
                 </div>
                 
                 {/* Tooltip on Hover */}
-                <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-3 w-48 bg-white p-2 rounded shadow-xl opacity-0 group-hover/pin:opacity-100 transition-opacity duration-300 pointer-events-none">
+                <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-3 w-48 bg-[#0F172A] border border-white/10 p-3 rounded shadow-xl opacity-0 group-hover/pin:opacity-100 transition-opacity duration-300 pointer-events-none z-20">
                   <img src={prop.images[0]} alt="" className="w-full h-24 object-cover mb-2 rounded-sm" />
-                  <p className="text-[#0F172A] font-bold text-xs">{prop.price}</p>
-                  <p className="text-gray-500 text-[10px] truncate">{prop.address}</p>
-                  <div className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 w-2 h-2 bg-white rotate-45"></div>
+                  <p className="text-white font-bold text-xs">{prop.price}</p>
+                  <p className="text-gray-400 text-[10px] truncate">{prop.address}</p>
+                  <div className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 w-2 h-2 bg-[#0F172A] border-r border-b border-white/10 rotate-45"></div>
                 </div>
               </div>
             </button>
           ))}
           
-          <div className="absolute bottom-8 left-8 bg-[#0F172A]/90 backdrop-blur border border-white/10 p-4 rounded-sm text-white max-w-xs">
+          <div className="absolute bottom-8 left-8 bg-[#0F172A]/90 backdrop-blur border border-white/10 p-4 rounded-sm text-white max-w-xs z-10">
             <h4 className="flex items-center gap-2 text-[#D4AF37] text-sm font-bold uppercase tracking-widest mb-1">
               <MapIcon size={16} /> Global Reach
             </h4>
@@ -511,7 +521,7 @@ const InteractiveMap = ({ onSelectProperty }) => {
 const Locations = () => {
   return (
     <section id="locations" className="py-24 bg-[#0F172A] relative">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 reveal">
         <div className="mb-12 flex justify-between items-end">
           <div>
             <h2 className="text-[#D4AF37] text-sm font-bold uppercase tracking-[0.2em] mb-2">Destinations</h2>
@@ -524,7 +534,7 @@ const Locations = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {LOCATIONS.map((loc, idx) => (
-            <div key={idx} className="group relative h-96 cursor-pointer overflow-hidden rounded-sm">
+            <div key={idx} className={`group relative h-96 cursor-pointer overflow-hidden rounded-sm reveal reveal-delay-${idx + 1}`}>
               <img 
                 src={loc.image} 
                 alt={loc.name}
@@ -562,7 +572,7 @@ const FeaturedListings = ({ onSelectProperty }) => {
 
   return (
     <section id="properties" className="py-24 bg-[#0B1120] relative border-y border-white/5">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 reveal">
         <div className="flex justify-between items-end mb-12">
           <div>
             <h2 className="text-[#D4AF37] text-sm font-bold uppercase tracking-[0.2em] mb-2">Exclusive Collection</h2>
@@ -588,7 +598,7 @@ const FeaturedListings = ({ onSelectProperty }) => {
           {displayedProperties.map((property, idx) => (
             <div 
               key={`${property.id}-${idx}`} 
-              className="group cursor-pointer"
+              className={`group cursor-pointer reveal reveal-delay-${idx + 1}`}
               onClick={() => onSelectProperty(property)}
             >
               <div className="relative overflow-hidden aspect-[4/5] mb-6">
@@ -646,11 +656,11 @@ const CinematicTours = () => {
         <div className="absolute inset-0 bg-[#0F172A]/40"></div>
       </div>
       
-      <div className="relative z-10 text-center max-w-4xl mx-auto px-4">
+      <div className="relative z-10 text-center max-w-4xl mx-auto px-4 reveal">
         <h2 className="text-[#D4AF37] text-sm font-bold uppercase tracking-[0.2em] mb-4">Cinematic Tours</h2>
         <h3 className="text-3xl md:text-5xl text-white font-light mb-8">Experience the Exceptional</h3>
         
-        <button className="group relative inline-flex items-center justify-center w-24 h-24 bg-white/10 backdrop-blur-md rounded-full border border-white/20 hover:scale-110 hover:bg-[#D4AF37] hover:border-[#D4AF37] transition-all duration-300">
+        <button className="group relative inline-flex items-center justify-center w-24 h-24 bg-white/10 backdrop-blur-md rounded-full border border-white/20 hover:scale-110 hover:bg-[#D4AF37] hover:border-[#D4AF37] transition-all duration-300 animate-pulse-slow">
           <Play size={32} className="text-white ml-2 fill-current group-hover:text-[#0F172A]" />
           <span className="absolute -bottom-10 text-xs text-white uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-opacity duration-300">Play Video</span>
         </button>
@@ -662,7 +672,7 @@ const CinematicTours = () => {
 const Features = () => {
   return (
     <section className="py-24 bg-[#0F172A]">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 reveal">
         <div className="text-center max-w-3xl mx-auto mb-16">
           <h2 className="text-[#D4AF37] text-sm font-bold uppercase tracking-[0.2em] mb-2">Amenities</h2>
           <h3 className="text-3xl md:text-4xl text-white font-light mb-6">Uncompromising Luxury</h3>
@@ -670,7 +680,7 @@ const Features = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12">
           {FEATURES.map((feature, index) => (
-            <div key={index} className="flex items-start space-x-4 p-6 hover:bg-white/5 transition-colors duration-300 rounded-sm group">
+            <div key={index} className={`flex items-start space-x-4 p-6 hover:bg-white/5 transition-colors duration-300 rounded-sm group reveal reveal-delay-${(index % 3) + 1}`}>
               <div className="flex-shrink-0 p-3 bg-[#D4AF37]/10 text-[#D4AF37] rounded-sm group-hover:bg-[#D4AF37] group-hover:text-[#0F172A] transition-all duration-300">
                 <feature.icon size={24} />
               </div>
@@ -689,7 +699,7 @@ const Features = () => {
 const Journal = () => {
   return (
     <section id="journal" className="py-24 bg-[#0B1120] border-t border-white/5">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 reveal">
         <div className="flex justify-between items-end mb-12">
           <div>
             <h2 className="text-[#D4AF37] text-sm font-bold uppercase tracking-[0.2em] mb-2">The Journal</h2>
@@ -699,7 +709,7 @@ const Journal = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {JOURNAL_POSTS.map((post, idx) => (
-            <div key={idx} className="group cursor-pointer">
+            <div key={idx} className={`group cursor-pointer reveal reveal-delay-${idx + 1}`}>
               <div className="relative overflow-hidden aspect-[3/2] mb-6">
                 <img 
                   src={post.image} 
@@ -727,22 +737,50 @@ const Journal = () => {
 };
 
 const Testimonials = () => {
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setActiveIndex((prev) => (prev + 1) % TESTIMONIALS.length);
+    }, 6000);
+    return () => clearInterval(timer);
+  }, []);
+
   return (
-    <section className="py-24 bg-[#0F172A]">
+    <section className="py-24 bg-[#0F172A] overflow-hidden reveal">
       <div className="max-w-4xl mx-auto px-4 text-center">
         <Quote size={48} className="text-[#D4AF37] mx-auto mb-8 opacity-50" />
-        <h2 className="text-2xl md:text-3xl text-white font-light italic leading-relaxed mb-8">
-          "{TESTIMONIALS[0].text}"
-        </h2>
-        <div>
-          <p className="text-[#D4AF37] font-medium tracking-wide uppercase text-sm mb-1">{TESTIMONIALS[0].author}</p>
-          <p className="text-gray-500 text-xs uppercase tracking-widest">{TESTIMONIALS[0].location}</p>
+        
+        <div className="relative min-h-[200px] md:min-h-[150px] flex flex-col justify-center items-center">
+          {TESTIMONIALS.map((testimonial, idx) => (
+            <div
+              key={idx}
+              className={`transition-all duration-700 ease-in-out ${
+                idx === activeIndex
+                  ? 'opacity-100 translate-y-0 scale-100 relative pointer-events-auto'
+                  : 'opacity-0 translate-y-4 scale-95 absolute pointer-events-none'
+              }`}
+            >
+              <h2 className="text-2xl md:text-3xl text-white font-light italic leading-relaxed mb-8">
+                "{testimonial.text}"
+              </h2>
+              <div>
+                <p className="text-[#D4AF37] font-medium tracking-wide uppercase text-sm mb-1">{testimonial.author}</p>
+                <p className="text-gray-500 text-xs uppercase tracking-widest">{testimonial.location}</p>
+              </div>
+            </div>
+          ))}
         </div>
         
         <div className="flex justify-center gap-2 mt-12">
-          <div className="w-12 h-1 bg-[#D4AF37]"></div>
-          <div className="w-2 h-1 bg-white/20"></div>
-          <div className="w-2 h-1 bg-white/20"></div>
+          {TESTIMONIALS.map((_, idx) => (
+            <button 
+              key={idx}
+              onClick={() => setActiveIndex(idx)}
+              className={`h-1 transition-all duration-300 ${idx === activeIndex ? 'w-12 bg-[#D4AF37]' : 'w-3 bg-white/20 hover:bg-white/40'}`}
+              aria-label={`Go to testimonial ${idx + 1}`}
+            />
+          ))}
         </div>
       </div>
     </section>
@@ -752,7 +790,7 @@ const Testimonials = () => {
 const AgentProfile = () => {
   return (
     <section id="agents" className="py-24 bg-[#0B1120] border-t border-white/5">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 reveal">
         <div className="bg-gradient-to-r from-[#162032] to-[#0F172A] rounded-2xl p-8 md:p-16 border border-white/5 shadow-2xl relative overflow-hidden">
           {/* Decorative Circle */}
           <div className="absolute top-0 right-0 -mr-20 -mt-20 w-96 h-96 bg-[#D4AF37]/5 rounded-full blur-3xl"></div>
@@ -800,50 +838,152 @@ const AgentProfile = () => {
 };
 
 const ContactForm = () => {
+  const [formData, setFormData] = useState({
+    firstName: '',
+    lastName: '',
+    email: '',
+    phone: '',
+    assetOfInterest: 'General Inquiry',
+    message: ''
+  });
+  const [errors, setErrors] = useState({});
+  const [isSubmitted, setIsSubmitted] = useState(false);
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({ ...prev, [name]: value }));
+    if (errors[name]) {
+      setErrors(prev => ({ ...prev, [name]: '' }));
+    }
+  };
+
+  const validate = () => {
+    const newErrors = {};
+    if (!formData.firstName.trim()) newErrors.firstName = 'First name is required';
+    if (!formData.lastName.trim()) newErrors.lastName = 'Last name is required';
+    if (!formData.email.trim()) {
+      newErrors.email = 'Email address is required';
+    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
+      newErrors.email = 'Please enter a valid email address';
+    }
+    if (!formData.phone.trim()) {
+      newErrors.phone = 'Phone number is required';
+    }
+    if (!formData.message.trim()) newErrors.message = 'Message is required';
+    return newErrors;
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const validationErrors = validate();
+    if (Object.keys(validationErrors).length > 0) {
+      setErrors(validationErrors);
+    } else {
+      setIsSubmitted(true);
+      setFormData({
+        firstName: '',
+        lastName: '',
+        email: '',
+        phone: '',
+        assetOfInterest: 'General Inquiry',
+        message: ''
+      });
+      setTimeout(() => setIsSubmitted(false), 5000);
+    }
+  };
+
   return (
-    <section id="contact" className="py-24 bg-[#0F172A] border-t border-white/5">
+    <section id="contact" className="py-24 bg-[#0F172A] border-t border-white/5 reveal">
       <div className="max-w-3xl mx-auto px-4">
         <div className="text-center mb-12">
           <h2 className="text-[#D4AF37] text-sm font-bold uppercase tracking-[0.2em] mb-2">Inquire</h2>
           <h3 className="text-3xl md:text-4xl text-white font-light">Begin Your Journey</h3>
         </div>
 
-        <form className="space-y-6">
+        {isSubmitted && (
+          <div className="mb-8 p-4 bg-[#D4AF37]/10 border border-[#D4AF37] text-[#D4AF37] text-center rounded-sm transition-all duration-500 animate-fadeIn">
+            <p className="text-sm font-medium">Thank you for your inquiry. A private advisor will contact you shortly.</p>
+          </div>
+        )}
+
+        <form onSubmit={handleSubmit} className="space-y-6">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="space-y-1">
               <label className="text-xs uppercase tracking-widest text-gray-400">First Name</label>
-              <input type="text" className="w-full bg-[#162032] border border-white/10 p-4 text-white focus:outline-none focus:border-[#D4AF37] transition-colors" />
+              <input 
+                type="text" 
+                name="firstName"
+                value={formData.firstName}
+                onChange={handleChange}
+                className={`w-full bg-[#162032] border p-4 text-white focus:outline-none focus:border-[#D4AF37] transition-colors ${errors.firstName ? 'border-red-500' : 'border-white/10'}`} 
+              />
+              {errors.firstName && <p className="text-red-500 text-xs mt-1">{errors.firstName}</p>}
             </div>
             <div className="space-y-1">
               <label className="text-xs uppercase tracking-widest text-gray-400">Last Name</label>
-              <input type="text" className="w-full bg-[#162032] border border-white/10 p-4 text-white focus:outline-none focus:border-[#D4AF37] transition-colors" />
+              <input 
+                type="text" 
+                name="lastName"
+                value={formData.lastName}
+                onChange={handleChange}
+                className={`w-full bg-[#162032] border p-4 text-white focus:outline-none focus:border-[#D4AF37] transition-colors ${errors.lastName ? 'border-red-500' : 'border-white/10'}`} 
+              />
+              {errors.lastName && <p className="text-red-500 text-xs mt-1">{errors.lastName}</p>}
             </div>
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="space-y-1">
               <label className="text-xs uppercase tracking-widest text-gray-400">Email Address</label>
-              <input type="email" className="w-full bg-[#162032] border border-white/10 p-4 text-white focus:outline-none focus:border-[#D4AF37] transition-colors" />
+              <input 
+                type="email" 
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+                className={`w-full bg-[#162032] border p-4 text-white focus:outline-none focus:border-[#D4AF37] transition-colors ${errors.email ? 'border-red-500' : 'border-white/10'}`} 
+              />
+              {errors.email && <p className="text-red-500 text-xs mt-1">{errors.email}</p>}
             </div>
             <div className="space-y-1">
               <label className="text-xs uppercase tracking-widest text-gray-400">Phone</label>
-              <input type="tel" className="w-full bg-[#162032] border border-white/10 p-4 text-white focus:outline-none focus:border-[#D4AF37] transition-colors" />
+              <input 
+                type="tel" 
+                name="phone"
+                value={formData.phone}
+                onChange={handleChange}
+                className={`w-full bg-[#162032] border p-4 text-white focus:outline-none focus:border-[#D4AF37] transition-colors ${errors.phone ? 'border-red-500' : 'border-white/10'}`} 
+              />
+              {errors.phone && <p className="text-red-500 text-xs mt-1">{errors.phone}</p>}
             </div>
           </div>
 
           <div className="space-y-1">
             <label className="text-xs uppercase tracking-widest text-gray-400">Asset of Interest</label>
-            <select className="w-full bg-[#162032] border border-white/10 p-4 text-white focus:outline-none focus:border-[#D4AF37] transition-colors appearance-none">
+            <select 
+              name="assetOfInterest"
+              value={formData.assetOfInterest}
+              onChange={handleChange}
+              className="w-full bg-[#162032] border border-white/10 p-4 text-white focus:outline-none focus:border-[#D4AF37] transition-colors appearance-none"
+            >
               <option>General Inquiry</option>
               <option>1088 Park Avenue</option>
               <option>888 Biscayne Blvd</option>
               <option>443 Greenwich St</option>
+              <option>900 W Olympic Blvd</option>
+              <option>505 N Lake Shore Dr</option>
             </select>
           </div>
 
           <div className="space-y-1">
             <label className="text-xs uppercase tracking-widest text-gray-400">Message</label>
-            <textarea rows="4" className="w-full bg-[#162032] border border-white/10 p-4 text-white focus:outline-none focus:border-[#D4AF37] transition-colors"></textarea>
+            <textarea 
+              name="message"
+              rows="4" 
+              value={formData.message}
+              onChange={handleChange}
+              className={`w-full bg-[#162032] border p-4 text-white focus:outline-none focus:border-[#D4AF37] transition-colors ${errors.message ? 'border-red-500' : 'border-white/10'}`}
+            ></textarea>
+            {errors.message && <p className="text-red-500 text-xs mt-1">{errors.message}</p>}
           </div>
 
           <button className="w-full bg-[#D4AF37] text-[#0F172A] py-5 uppercase text-xs font-bold tracking-widest hover:bg-white transition-colors flex items-center justify-center gap-2">
@@ -853,7 +993,7 @@ const ContactForm = () => {
       </div>
     </section>
   );
-}
+};
 
 const Footer = () => {
   return (
@@ -870,13 +1010,26 @@ const Footer = () => {
             <p className="text-gray-500 font-light max-w-md leading-relaxed">
               Redefining luxury real estate. We curate the world's most exceptional properties for a clientele that expects nothing less than perfection.
             </p>
+            
+            {/* Social Media Links */}
+            <div className="flex gap-4 mt-6">
+              <a href="#" className="p-2 border border-white/10 text-gray-400 hover:text-[#D4AF37] hover:border-[#D4AF37] transition-all duration-300 rounded-full" aria-label="Instagram">
+                <Instagram size={16} />
+              </a>
+              <a href="#" className="p-2 border border-white/10 text-gray-400 hover:text-[#D4AF37] hover:border-[#D4AF37] transition-all duration-300 rounded-full" aria-label="LinkedIn">
+                <Linkedin size={16} />
+              </a>
+              <a href="#" className="p-2 border border-white/10 text-gray-400 hover:text-[#D4AF37] hover:border-[#D4AF37] transition-all duration-300 rounded-full" aria-label="Twitter">
+                <Twitter size={16} />
+              </a>
+            </div>
           </div>
           
           <div>
             <h4 className="text-sm font-bold uppercase tracking-widest text-[#D4AF37] mb-6">Navigation</h4>
             <ul className="space-y-4 text-gray-400 font-light">
               {['Home', 'Properties', 'Locations', 'Journal', 'Contact'].map(link => (
-                <li key={link}><a href="#" className="hover:text-white transition-colors">{link}</a></li>
+                <li key={link}><a href={`#${link.toLowerCase()}`} className="hover:text-white transition-colors">{link}</a></li>
               ))}
             </ul>
           </div>
@@ -884,14 +1037,14 @@ const Footer = () => {
           <div>
             <h4 className="text-sm font-bold uppercase tracking-widest text-[#D4AF37] mb-6">Office</h4>
             <address className="not-italic text-gray-400 font-light space-y-4">
-              <p>1500 Broadway, Suite 3200<br/>New York, NY 10036</p>
+              <p>730 Fifth Avenue, 22nd Floor<br/>New York, NY 10019</p>
               <p>+1 (212) 555-0199<br/>hello@skyline.luxury</p>
             </address>
           </div>
         </div>
         
         <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center text-xs text-gray-600 uppercase tracking-widest">
-          <p>&copy; 2024 Skyline Real Estate. All rights reserved.</p>
+          <p>&copy; 2026 Skyline Real Estate. All rights reserved.</p>
           <div className="flex space-x-8 mt-4 md:mt-0">
             <a href="#" className="hover:text-gray-400">Privacy</a>
             <a href="#" className="hover:text-gray-400">Terms</a>
@@ -906,19 +1059,33 @@ const Footer = () => {
 const App = () => {
   const [selectedProperty, setSelectedProperty] = useState(null);
 
+  useEffect(() => {
+    const observerOptions = {
+      root: null,
+      rootMargin: '0px 0px -50px 0px',
+      threshold: 0.1,
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          // Stop observing once it has revealed
+          observer.unobserve(entry.target);
+        }
+      });
+    }, observerOptions);
+
+    const revealElements = document.querySelectorAll('.reveal');
+    revealElements.forEach((el) => observer.observe(el));
+
+    return () => {
+      revealElements.forEach((el) => observer.unobserve(el));
+    };
+  }, []);
+
   return (
     <div className="font-sans antialiased bg-[#0F172A] selection:bg-[#D4AF37] selection:text-[#0F172A]">
-      <style>
-        {`
-          @keyframes slow-zoom {
-            0% { transform: scale(1); }
-            100% { transform: scale(1.1); }
-          }
-          .animate-slow-zoom {
-            animation: slow-zoom 20s infinite alternate linear;
-          }
-        `}
-      </style>
       <Navbar />
       <Hero />
       <Locations />
