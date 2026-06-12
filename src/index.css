@@ -14,6 +14,12 @@ body {
   color: #F8FAFC;
 }
 
+#root {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
 /* Custom Heading Font */
 h1, h2, h3, .font-serif-lux {
   font-family: 'Cormorant Garamond', serif;
@@ -40,17 +46,29 @@ h1, h2, h3, .font-serif-lux {
 /* Animations */
 @keyframes slow-zoom {
   0% { transform: scale(1); }
-  100% { transform: scale(1.15); }
+  100% { transform: scale(1.1); }
 }
 
 .animate-slow-zoom {
   animation: slow-zoom 25s infinite alternate ease-in-out;
 }
 
+/* Shimmer placeholder loading state for images */
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.animate-shimmer {
+  background: linear-gradient(90deg, #162032 25%, #243048 50%, #162032 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.6s infinite ease-in-out;
+}
+
 /* Scroll Reveal classes */
 .reveal {
   opacity: 0;
-  transform: translateY(40px);
+  transform: translateY(30px);
   transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1), transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
   will-change: transform, opacity;
 }
